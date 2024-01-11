@@ -1,4 +1,6 @@
 
+import {corpus} from "./corpus.js"
+
 export function getGuess(known, correct, incorrect){
     let possible_guesses = new Set("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
     possible_guesses = new Set([...possible_guesses].filter(char => !correct.has(char) && !incorrect.has(char)));
