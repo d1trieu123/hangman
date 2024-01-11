@@ -1,3 +1,3 @@
 export function corpus(){
-    return ["ABIDE", "AARON", "CHOMP"]
+    return ["abide", "aaron", "chomp"]
 }

@@ -2,7 +2,7 @@
 import {corpus} from "./corpus.js"
 
 export function getGuess(known, correct, incorrect){
-    let possible_guesses = new Set("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let possible_guesses = new Set("abcdefghijklmnopqrstuvwxyz");
     possible_guesses = new Set([...possible_guesses].filter(char => !correct.has(char) && !incorrect.has(char)));
     let wordMap = new Map()
 

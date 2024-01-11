@@ -8,9 +8,10 @@ import React, {useState, useEffect} from 'react';
 import Notification from './components/Notification';
 import Popup from './components/Popup';
 import { showNotification as alert } from './helpers/helpers';
+import {corpus} from "./helpers/corpus"
 
 
-const words = ['application', 'programming', 'interface', 'wizard'];
+const words = corpus()
 
 let selectedWord = words[Math.floor(Math.random() * words.length)]
 
