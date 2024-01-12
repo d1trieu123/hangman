@@ -13,4 +13,4 @@ On incorrect guess, only the probability of your guess with the option of toggli
 
 On correct guess, the probabilty of both your guess and the best guess would be shown.
 
-At the end of the game on win or loss, your guess pattern are compared with the algorithms optimal guess pattern.
+
