@@ -35,6 +35,7 @@ function App() {
   const [bestGuess, setBestGuess] = useState(first_guess)
   const [bestProb, setBestProb] = useState(first_prob)
   const [guessProb, setGuessProb] = useState(guess_prob)
+  const [toggleHint, setToggleHint] = useState(false)
   useEffect(()=>{
     const handleKeydown = event => {
       const {key, keyCode} = event
@@ -89,6 +90,7 @@ function App() {
   setBestGuess(first_guess)
   setBestProb(first_prob)
   setGuessProb(0)
+  setToggleHint(false)
   correctSet.clear()
   wrongSet.clear()
 
@@ -107,7 +109,7 @@ function App() {
         
       </div>
       {!playing && <StatPrompt/> }
-      { playing && <Stats guess={guess} guessProb={guessProb} bestGuess={bestGuess} bestProb={bestProb} />}
+      { playing && <Stats showHint={toggleHint} toggleHint={() => setToggleHint(!toggleHint)} guess={guess} guessProb={guessProb} bestGuess={bestGuess} bestProb={bestProb} />}
       <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain}/>
       <Notification showNotification={showNotification}/>
       
