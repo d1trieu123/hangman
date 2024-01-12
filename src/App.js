@@ -19,10 +19,10 @@ const words = corpus()
 let selectedWord = words[Math.floor(Math.random() * words.length)]
 let correctSet = new Set()
 let wrongSet = new Set()
-let initial_vals = getGuess("-----", correctSet, wrongSet)
+let initial_vals = getGuess("-----", correctSet, wrongSet,"")
 let first_guess = initial_vals[0]
 let first_prob = initial_vals[1]
-let first_map = initial_vals[2]
+let guess_prob = initial_vals[2]
 function App() {
   
   const [known, setKnown] = useState(["-","-","-","-","-"])
@@ -34,32 +34,33 @@ function App() {
   const [playing, setPlaying] = useState(false)
   const [bestGuess, setBestGuess] = useState(first_guess)
   const [bestProb, setBestProb] = useState(first_prob)
-  const [wordMap, setWordMap] = useState(first_map)
-  const [guessProb, setGuessProb] = useState(0)
-  console.log(wordMap)
+  const [guessProb, setGuessProb] = useState(guess_prob)
   useEffect(()=>{
     const handleKeydown = event => {
       const {key, keyCode} = event
-      setPlaying(true)
-      
       if (playable && keyCode >= 65 && keyCode <= 90) {
+        setPlaying(true)
         const letter = key.toLowerCase();
         setGuess(letter)
+        if(!correctLetters.includes(letter) && !wrongLetters.includes(letter))
+        {
+          let newStuff = getGuess(known,correctSet,wrongSet, letter)
+          setBestGuess(newStuff[0])
+          setBestProb(newStuff[1])
+          setGuessProb(newStuff[2])
+        }
+        else{
+          setGuessProb(guessProb)
+        }
         
-        setGuessProb(wordMap.get(letter))
-        let newStuff = getGuess(known,correctSet,wrongSet)
-        setBestGuess(newStuff[0])
-        setBestProb(newStuff[1])
-        setWordMap(newStuff[2])
         let gameState = known
         if (selectedWord.includes(letter)) {
-          let index = selectedWord.indexOf(letter)
-          gameState[index] = letter
-          setKnown(gameState)
           if (!correctLetters.includes(letter)) {
             setCorrectLetters(currentLetters => [...currentLetters,letter])
             correctSet.add(letter)
-            
+            let index = selectedWord.indexOf(letter)
+            gameState[index] = letter
+            setKnown(gameState)            
           } else {
             alert(setShowNotification)
           }
@@ -85,7 +86,11 @@ function App() {
   setKnown(["-","-","-","-","-"])
   setGuess("")
   setPlaying(false)
-
+  setBestGuess(first_guess)
+  setBestProb(first_prob)
+  setGuessProb(0)
+  correctSet.clear()
+  wrongSet.clear()
 
   const random =  Math.floor(Math.random() * words.length)
   selectedWord = words[random]

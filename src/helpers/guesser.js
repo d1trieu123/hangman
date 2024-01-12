@@ -1,7 +1,7 @@
 
 import {corpus as words } from "./corpus.js"
 
-export function getGuess(known, correct, incorrect){
+export function getGuess(known, correct, incorrect, guess){
     let possible_guesses = new Set("abcdefghijklmnopqrstuvwxyz");
     possible_guesses = new Set([...possible_guesses].filter(char => !correct.has(char) && !incorrect.has(char)));
     let wordMap = new Map()
@@ -55,7 +55,11 @@ export function getGuess(known, correct, incorrect){
             next_prob = letter_prob;
         }   
     }
+    let guessProb = 0
+    if(guess !== ""){
+        guessProb = wordMap.get(guess)
+    }
     
-    return [next_guess, next_prob, wordMap]
+    return [next_guess, next_prob, guessProb]
     
 }
