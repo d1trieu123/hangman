@@ -1,16 +1,13 @@
 import React from 'react'
-import { getGuess } from '../helpers/guesser'
 
-const Stats = ({guess, known, correctLetters, wrongLetters}) => {
-    let knownString = known.join("")
-    let correctSet = new Set(correctLetters)
-    let wrongSet = new Set(wrongLetters)
-    let best_guess, best_prob, wordMap = getGuess(knownString, correctSet, wrongSet)
-    let guess_prob = wordMap.get(guess)
+
+const Stats = ({  guess, guessProb, bestGuess, bestProb}) => {
+    
     return (
     <div>
-        <p>{best_guess} {best_prob}</p>
-        <p>{guess} {guess_prob}</p>
+        
+        <p>The best guess was "{bestGuess}" which had a {(bestProb*100).toFixed(2)}% chance to be correct</p>
+        <p>You guessed "{guess}" which had a {(guessProb*100).toFixed(2)}% chance to be correct</p>
         
     </div>
     )

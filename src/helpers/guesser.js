@@ -1,5 +1,5 @@
 
-import {corpus} from "./corpus.js"
+import {corpus as words } from "./corpus.js"
 
 export function getGuess(known, correct, incorrect){
     let possible_guesses = new Set("abcdefghijklmnopqrstuvwxyz");
@@ -9,9 +9,9 @@ export function getGuess(known, correct, incorrect){
     let next_guess = "";
     let next_prob = 0.0;
     let possible_words = [];
-    
+    let corpus = words()
     for (let i in corpus) {
-        word = corpus[i]
+        let word = corpus[i]
         let compatible = true;
 
         for (let spot = 0; spot < word.length; spot++) {
@@ -55,7 +55,7 @@ export function getGuess(known, correct, incorrect){
             next_prob = letter_prob;
         }   
     }
-    console.log(wordMap)
+    
     return [next_guess, next_prob, wordMap]
     
 }
