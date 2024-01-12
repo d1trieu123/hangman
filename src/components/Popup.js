@@ -8,6 +8,7 @@ const Popup = ({correctLetters, wrongLetters, selectedWord, setPlayable, playAga
 
     if (checkWin(correctLetters, wrongLetters, selectedWord) === "win"){
         finalMessage = "You won!"
+        finalMessageRevealWord = `the word was: ${selectedWord}`
         playable = false
 
     } 
